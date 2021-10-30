@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  keycloak:
+    image: jboss/keycloak:15.0.2
+    container_name: keycloak-demo
+    command: ["-c standalone.xml"]
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - DB_VENDOR=h2
+    ports:
+      - 8080:8080
+      - 9990:9990
+
