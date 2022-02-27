@@ -23,8 +23,7 @@ import net.rossillo.spring.web.mvc.CachePolicy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
@@ -34,19 +33,19 @@ public class ProductController {
 	private @Autowired HttpServletRequest request;
 
         
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@GetMapping(value = "/logout")
 	public String handleLogoutt() throws ServletException {
             request.logout();
             return "landing";
         }
 
-    @RequestMapping(value = "/secure", method = RequestMethod.GET)
-    public String secure() throws ServletException {
-        return "secure login";
+    @GetMapping(value = "/secure")
+    public String secure() {
+        return "secure";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-	public String landing() throws ServletException {
+    @GetMapping(value = "/")
+	public String landing() {
             return "landing";
     }
 
