@@ -24,9 +24,8 @@ This application also show how to combine Spring Security with <span>Keycloak</s
 System Requirements
 -------------------
 
-The quickstart requires that you have the [SpringBoot Service](../service-springboot-rest/README.md) running. It assumes the
-services are located at `http://localhost:8081/products`. If the services are running elsewhere you need to edit
-`resources/application.properties` and replace the value of `product.service.url`.
+The quickstart requires that you have the [SpringBoot Service](../service-springboot-rest/README.md) running. It protects a secure page 
+running at `http://localhost:8090/secure`. 
 
 See the [Getting Started Guide](../docs/getting-started.md) for the minimum requirements and steps to build and run the quickstart.
 
@@ -44,26 +43,25 @@ The following steps shows how to create the client required for this quickstart:
 * Add the following values:
   * Client ID: You choose (for example `app-springboot`)
   * Client Protocol: `openid-connect`
-  * Root URL: URL to the application (for example `http://localhost:8080/app-springboot`)
+  * Root URL: URL to the application (for example `http://localhost:8090`)
 * Click `Save`
 
-Once saved you need to change the `Access Type` to `public` and click save.
+Once saved you need to change the `Access Type` to `confidential` and click save.
 
-As an alternative you can create the client by importing the file [client-import.json](config/client-import.json).
 
 If you deploy the application somewhere else change the hostname and port of the URLs accordingly.
 
 Finally, you need to update the adapter using SpringBoot's configuration file (application.properties) :
 
 ````
-server.compression.enabled: true
-server.compression.min-response-size: 1
 server.connection-timeout=5000
-server.port = 8080
-keycloak.realm=springboot-quickstart
-keycloak.auth-server-url=http://localhost:8180/auth
+spring.freemarker.cache=false
+server.port = 8090
+keycloak.realm=keycloak-tutorial
+keycloak.auth-server-url=http://localhost:8080/auth
 keycloak.ssl-required=external
 keycloak.resource=app-springboot
+keycloak.credentials.secret=1c79fd4b-1d01-43d6-a6a4-255b8ecab0c6
 keycloak.public-client=true
 
 ````
@@ -85,7 +83,7 @@ Build and Run the Quickstart
 Access the Quickstart
 ---------------------
 
-You can access the application with the following URL: <http://localhost:8080/>.
+You can access the application with the following URL: <http://localhost:8090/>.
 
 Integration test of the Quickstart
 ----------------------------------
