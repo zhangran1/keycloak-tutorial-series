@@ -12,3 +12,18 @@ services:
       - 8080:8080
       - 9990:9990
 
+  ldap:
+    image: osixia/openldap:1.2.0
+    container_name: keycloak-userfedertaion-ldap
+    command: --copy-service
+    environment:
+      LDAP_SSL_HELPER_PREFIX: "ldap"
+      LDAP_TLS_VERIFY_CLIENT: "never"
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./ldap-ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom
+    ports:
+      - "389:389"
+    domainname: "ldap.example.org" # important: same as hostname
+    hostname: "ldap.example.org"
